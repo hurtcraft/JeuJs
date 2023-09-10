@@ -69,7 +69,7 @@ let usableImg = {
     "91": null,
     "92": null,
     "93": null,
-    "94": null
+    "94": null,
 };
 
 

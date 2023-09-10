@@ -15,19 +15,30 @@
     background-color: red;
     position: fixed;
     right: 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    overflow: auto;
+    grid-gap: 5px;
 }
-#showTools{
+
+#showTools,#exportMap{
     background-color: red;
     position: fixed;
     right: 0;
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    
+    margin-top: 10vh;
+}
+#exportMap{
+    transform: translateX(-200%);
 }
 button{
     position: fixed;
 }
 img{
     image-rendering: pixelated;
-
+    border: solid black 2px;
+    user-select: none;
+    margin-top: 20px;
+}
+.currentImg{
+    transform: scale(1.1);
 }
