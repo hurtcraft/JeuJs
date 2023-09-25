@@ -21,7 +21,48 @@ let map = [
     [[0],[0],[0],[0],[0],[0],[0],[0],[0],[56],[29,92],[29,92],[55],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]]
 ];
 
-  
+let map2= [
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0, 19], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 59], [0, 77], [0, 15], [0, 17], [0, 20], [0], [0, 18], [0, 15], [0, 77], [0, 59], [0, 59], [0], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 62], [0, 79], [0], [0], [0], [0], [0], [0], [0, 79], [0, 28, 7], [0, 63], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 62], [0, 80], [0], [0, 28], [0, 34], [0, 28], [0, 34], [0], [0, 80], [0, 28], [0, 63], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 54], [0, 29], [0, 29], [0, 30], [0, 29], [0, 29], [0, 30], [0, 30], [0, 34], [0, 34], [0, 57], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 54], [0, 29], [0, 29], [0, 29], [0, 29], [0, 30], [0, 29], [0, 30], [0, 28], [0, 34], [0, 57], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 54], [0, 32], [0, 32, 28], [0, 32], [0, 32, 33], [0, 32, 41], [0, 32, 28], [0, 32], [0, 32, 28], [0, 32, 41], [0, 57], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 54], [0, 32, 33], [0, 32], [0, 32, 39], [0, 32], [0, 32], [0, 32], [0, 32, 39], [0, 32], [0, 32], [0, 57], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0, 54, 52], [0, 28, 90], [0, 32], [0, 32, 33], [0, 32], [0, 32, 39], [0, 32, 32, 34], [0, 32, 41], [0, 32], [0, 32, 89], [0, 57, 53], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0], [0, 83, 60], [0, 32, 59], [0, 32, 59], [0, 32, 59], [0, 32, 59], [0, 32, 59], [0, 32, 59], [0, 32, 59], [0, 83, 61], [0], [0], [0], [0], [0], [0], [0], [0]
+    ],
+    [
+        [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0]
+    ]
+];
+
 
 
 let collidableMap=[]
@@ -43,7 +84,6 @@ function readMap(map){
                 img=createImg(path.concat(currentTile));
                 c=new Collidable(img,j*SpriteWidth,i*SpriteHeight);
                 collidableMap.push(c);
-                //drawTile(path.concat(currentTile),j*SpriteWidth,i*SpriteHeight);
             }
         }
     }
@@ -52,6 +92,8 @@ function readMap(map){
 function createImg(src){
     let img=new Image();
     img.src=src;
+    img.width=img.naturalWidth*ScaleFactor;
+    img.height=img.naturalHeight*ScaleFactor;
     return img;
 }
 function drawMap(collidableMap){
@@ -65,29 +107,11 @@ function drawMap(collidableMap){
     }
 }
 
-function drawTile(tileSrc,x,y){
-    let img=new Image();
-    img.src=tileSrc;
-    img.onload=()=>{
-        CONTEXT.drawImage(img,x,y,img.naturalWidth*ScaleFactor ,img.naturalHeight*ScaleFactor);
 
-    }
-    
+readMap(map2);
 
-    //CONTEXT.drawImage("C:\\Users\\Hurtcraft\\Desktop\\JeuJS\\img\\sprites\\0.png",0,0);
-}
-//drawTile("../../img/sprites/5.png",0,0);
-console.log(map);
-readMap(map);
-console.log(collidableMap);
 drawMap(collidableMap);
 
-let mouseX;
-let mouseY;
-addEventListener("mousemove",(event)=>{
-    mouseX=event.clientX;
-    mouseY=event.clientY;
-})
 
 
 let rouge=new Image();
@@ -97,41 +121,24 @@ let bleu=new Image();
 bleu.src="../../bleu.png";
 
 
-let p = new Player(rouge,200,200);
-p.move(map);
-let p2=new Player(bleu,300,300);
+let p = new Player(rouge,50,50);
 
+let p2=new Player(bleu,300,300);
+p.move(collidableMap);
 
 function animate(){
-    //console.log(mouseX,mouseY)
-    //console.log(p.x,p.y,p.width,p.height);
-    
     CONTEXT.clearRect(0,0,CANVAS.width,CANVAS.height);
-    p.setPos(p.x,p.y);
     drawMap(collidableMap);
+    
+    p.setPos(p.x,p.y);
+    
     CONTEXT.drawImage(p.img,p.x,p.y);
     //CONTEXT.drawImage(p2.img,p2.x,p2.y);
-    //console.log(p.x,p.y);
-    //p.collide(p2);
-    //CONTEXT.drawImage(i,mouseX,mouseY,100,100);
+    //p.collide(p2.x,p2.y,p2.width,p2.height);
+
     requestAnimationFrame(animate);
     
 };
 animate();
 
-
-/**
-const img=new Image();
-img.src="../img/playerSprite/Pink_Monster/Pink_Monster_Idle_4.png"
-img.classList.add("sprite");
-
-
-function animate(){
-    CONTEXT.clearRect(0,0,CANVAS.width,CANVAS.height);
-
-    CONTEXT.drawImage(img,0,0,SpriteWidth,SpriteHeight,0,0,64,64);
-    requestAnimationFrame(animate);
-}
-animate();
- */
 

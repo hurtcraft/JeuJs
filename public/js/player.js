@@ -1,16 +1,17 @@
 import {Collidable} from "./collidable.js";
 
 class Player extends Collidable{
-    static velocity=5;
+    static velocity=10;
 
     constructor(img,x,y){
         super(img,x,y);
         
         this.animations=new Map();
+
     }
 
     move(lvlMap) {
-        
+        //this.checkCollides(lvlMap);
         const map = this.mapMoves(lvlMap);
         const keysPressed = new Set();
 
@@ -26,8 +27,8 @@ class Player extends Collidable{
             
             for (const direction of keysPressed) {
                 if (map.has(direction)) {
-                    
-                    map.get(direction)("abc");
+
+                    map.get(direction)(lvlMap);
                 }
             }
             requestAnimationFrame(updatePlayerPosition);
@@ -47,19 +48,51 @@ class Player extends Collidable{
         return map;
     }
     moveLeft(lvlMap){
-        this.x-=Player.velocity;
+        let dx=-Player.velocity;
+        //rapelle toi dla solution c ez
+        // c pas lbon truc que tpasse en param
+
+        let c;
+        for(let i = 0;i<lvlMap.length;i++){
+            c=lvlMap[i];
+            if(this.collide(c.x+dx,c.y,c.width,c.height)){
+                dx=0;
+                console.log("gauche");
+            }
+        }
+        this.x+=dx;
     }
     moveRight(lvlMap){
-        this.x+=Player.velocity;
+        let dx=Player.velocity;
+        let c;
+        for(let i = 0;i<lvlMap.length;i++){
+            c=lvlMap[i];
+            //console.log(c);
+            if(this.collide(c.x-dx,c.y,c.width,c.height)){
+                console.log("droite");
+                dx=0;
+            }
+        }
+        this.x+=dx;
     }
     moveDown(lvlMap){
+
         this.y+=Player.velocity;
     }
     moveUp(lvlMap){
+
         this.y-=Player.velocity;
     }
-    checkCollide(lvlMap){
-        
+    checkCollides(lvlMap,x,y){
+         
+        let c;
+        for(let i = 0;i<lvlMap.length;i++){
+            c=lvlMap[i];
+            if(this.collide(c.x+x,c.y+y,c.width,c.height)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
