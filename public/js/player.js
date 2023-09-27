@@ -1,8 +1,8 @@
 import {Collidable} from "./collidable.js";
 
 class Player extends Collidable{
-    static velocity=10;
-
+    static velocity=5;
+    static velocityFactor=1.5
     constructor(img,x,y){
         super(img,x,y);
         
@@ -51,44 +51,40 @@ class Player extends Collidable{
         let dx=-Player.velocity;
         //rapelle toi dla solution c ez
         // c pas lbon truc que tpasse en param
-
-        let c;
-        for(let i = 0;i<lvlMap.length;i++){
-            c=lvlMap[i];
-            if(this.collide(c.x+dx,c.y,c.width,c.height)){
-                dx=0;
-                console.log("gauche");
-            }
+        if(this.checkCollides(lvlMap,dx,0)){
+            dx=0
         }
-        this.x+=dx;
+        this.x+=dx*Player.velocityFactor;
     }
     moveRight(lvlMap){
         let dx=Player.velocity;
-        let c;
-        for(let i = 0;i<lvlMap.length;i++){
-            c=lvlMap[i];
-            //console.log(c);
-            if(this.collide(c.x-dx,c.y,c.width,c.height)){
-                console.log("droite");
-                dx=0;
-            }
+        if(this.checkCollides(lvlMap,dx,0)){
+            dx=0
         }
-        this.x+=dx;
+        this.x+=dx*Player.velocityFactor;
     }
     moveDown(lvlMap){
-
-        this.y+=Player.velocity;
+        let dy=Player.velocity;
+        if(this.checkCollides(lvlMap,0,dy)){
+            dy=0
+        }
+        this.y+=dy*Player.velocityFactor;
     }
     moveUp(lvlMap){
 
-        this.y-=Player.velocity;
+        let dy=-Player.velocity;
+        if(this.checkCollides(lvlMap,0,dy)){
+            dy=0
+        }
+        console.log(dy)
+        this.y+=dy*Player.velocityFactor;    
     }
     checkCollides(lvlMap,x,y){
          
         let c;
         for(let i = 0;i<lvlMap.length;i++){
             c=lvlMap[i];
-            if(this.collide(c.x+x,c.y+y,c.width,c.height)){
+            if(this.collide(x,y,c)){
                 return true;
             }
         }

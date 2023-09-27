@@ -27,11 +27,11 @@ class Collidable{
     }
 
 
-
-    collide(Cx,Cy,Cwidth,Cheight){
+    collide(x,y,collidable)
+    {
         //passe un collidable en param et dx dy
            //droite                    //gauche              //bas                 //haut
-        if(this.x+this.width<=Cx || this.x>Cx+Cwidth || this.y>Cy+Cheight || this.y+this.width <Cy){
+        if(this.x+x+this.width<=collidable.x || this.x+x>collidable.x+collidable.width || this.y+y>collidable.y+collidable.height || this.y+y+this.width <collidable.y){
             //console.log("safe");
             return false;
         }
