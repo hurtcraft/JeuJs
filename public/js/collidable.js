@@ -31,7 +31,7 @@ class Collidable{
     {
         //passe un collidable en param et dx dy
            //droite                    //gauche              //bas                 //haut
-        if(this.x+x+this.width<=collidable.x || this.x+x>collidable.x+collidable.width || this.y+y>collidable.y+collidable.height || this.y+y+this.width <collidable.y){
+        if(this.x+x+this.width<=collidable.x || this.x+x>=collidable.x+collidable.width || this.y+y>=collidable.y+collidable.height || this.y+y+this.width <=collidable.y){
             //console.log("safe");
             return false;
         }
@@ -42,7 +42,7 @@ class Collidable{
         }
     }
     actionIfCollide(){
-        console.log("collision");
+        return 0;
     }
 }
 

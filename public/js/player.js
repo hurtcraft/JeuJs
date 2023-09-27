@@ -2,11 +2,15 @@ import {Collidable} from "./collidable.js";
 
 class Player extends Collidable{
     static velocity=5;
-    static velocityFactor=1.5
+    static velocityFactor=1.2
     constructor(img,x,y){
         super(img,x,y);
         
         this.animations=new Map();
+        this.action={
+            0:()=>console.log("test"),
+            1:()=>console.log("test")
+        }
 
     }
 
@@ -85,13 +89,14 @@ class Player extends Collidable{
         for(let i = 0;i<lvlMap.length;i++){
             c=lvlMap[i];
             if(this.collide(x,y,c)){
+                this.action=c.actionIfCollide();
+                console.log(this.action);
                 return true;
             }
         }
         return false;
     }
-
-
+    
 
 
 
